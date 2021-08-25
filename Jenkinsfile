@@ -12,8 +12,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    dockerapp = docker.build("odirleyrp/pedelogo-catalogo:${env.BUILD_ID}",
-                    '-f ./src/PedeLogo.Catalogo.Api/Dockerfile .')
+                    dockerapp = docker.build("odirleyrp/pedelogo-catalogo:${env.BUILD_ID}", '-f ./src/PedeLogo.Catalogo.Api/Dockerfile .')
                 }
             }
         }
