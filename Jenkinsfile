@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage ('Docker Push Image') {
+        stage ('Docker Push Image v2 ') {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
