@@ -12,20 +12,31 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    dockerapp = docker.build("odirleyrp/pedelogo-catalogo:${env.BUILD_ID}", '-f ./src/PedeLogo.Catalogo.Api/Dockerfile .')
+                    dockerapp = docker.build("odirleyrp/pedelogo-catalogo:${env.BUILD_ID}",
+                        '-f ./src/PedeLogo.Catalogo.Api/Dockerfile .')
                 }
             }
         }
 
-        stage ('Docker Push Image v2 ') {
+        stage ('Docker Push Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
                     dockerapp.push('latest')
                     dockerapp.push("${env.BUILD_ID}")
-                    }
                 }
             }
+        }
+
+        stage('Deploy Kubernetes') {
+        agent {
+          Kubernetes {
+            cloud 'Kubernetes'
+          }
+        }
+          steps {
+              KubernetesDeploy(configs: '**', kubeconfigId: 'kubeconfig' )
+          }
         }
     }
 }
