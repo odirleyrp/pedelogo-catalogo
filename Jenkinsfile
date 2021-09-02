@@ -30,12 +30,12 @@ pipeline {
 
         stage('Deploy Kubernetes') {
         agent {
-          Kubernetes {
-            cloud 'Kubernetes'
+          kubernetes {
+            cloud 'kubernetes'
           }
         }
           steps {
-              KubernetesDeploy(configs: '**', kubeconfigId: 'kubeconfig' )
+              kubernetesDeploy(configs: '**', kubeconfigId: 'kubeconfig' )
           }
         }
     }
