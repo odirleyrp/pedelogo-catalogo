@@ -6,7 +6,6 @@ namespace PedeLogo.Catalogo.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ConfigController : ControllerBase
     {
         [HttpPut("unreadfor/{seconds}")]
         public IActionResult UnreadFor([FromRoute] int seconds)
