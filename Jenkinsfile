@@ -28,6 +28,11 @@ pipeline {
             }
         }
 
+
+
+
+
+
         stage('Deploy Kubernetes') {
             agent {
               kubernetes {
