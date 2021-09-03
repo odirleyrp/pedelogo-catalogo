@@ -1,34 +1,38 @@
 ---
+apiVersion: apps/v1
 kind: Deployment
-apiVersion: extensions/v1beta1
 metadata:
-  name: nginx-deploy
-  labels:
-    app: nginx
+  name: mongodb-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: mongodb
   template:
     metadata:
       labels:
-        app: nginx
+        app: mongodb
     spec:
       containers:
-      - name: nginx-deploy
-        image: nginx
+      - name: mongodb
+        image: mongo:4.2.8
         ports:
-        - containerPort: 80
+        - containerPort: 27017
+        resources: {}
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: mongouser
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: mongopwd
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: mongo-service
 spec:
-  ports:
-  - name: http
-    targetPort: 80
-    port: 80
   selector:
-    app: nginx
+    app: mongodb
+  ports:
+  - port: 27017
+    targetPort: 27017
