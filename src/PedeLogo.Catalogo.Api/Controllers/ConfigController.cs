@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using PedeLogo.Catalogo.Api.Config;
-using System;
 
 namespace PedeLogo.Catalogo.Api.Controllers
 {
