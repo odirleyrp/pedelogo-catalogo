@@ -4,8 +4,8 @@ using System;
 
 namespace PedeLogo.Catalogo.Api.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ConfigController : ControllerBase
     {
         [HttpPut("unreadfor/{seconds}")]
